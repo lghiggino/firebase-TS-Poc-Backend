@@ -34,11 +34,15 @@ export default class Helper {
     //     });
     // }
 
-    static async deleteOneByOne(collectionName){
+    static async deleteOneByOne(collectionName: string){
         const snapshot = await db.collection(collectionName).get()
         snapshot.forEach((doc) => {
             doc.ref.delete()
         })
+    }
+
+    static async log(string: string){
+        console.log("========================BANANA!=============================", string)
     }
 
 }

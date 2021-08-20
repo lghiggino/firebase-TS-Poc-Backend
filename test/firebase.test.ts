@@ -1,11 +1,9 @@
 import { fb, db } from "../src/firebase";
+import  Helper from "./Helper"
 
 describe("Initial firebase tests", () => {
     beforeEach(async () => {
-        const snapshot = await db.collection("users").get()
-        snapshot.forEach((doc) => {
-            doc.ref.delete()
-        })
+        await Helper.deleteOneByOne("users")
       });
 
     it.skip("should initialize firebase", async () => {
@@ -13,17 +11,23 @@ describe("Initial firebase tests", () => {
         console.log(connection)
     })
 
-    it.skip("should add data to a collection", async () => {
+    it("should add data to a collection", async () => {
+        //create a new document
         const document = {
             first: 'Ada',
             last: 'Lovelace',
             born: 1815
         }
+        const document2 = {
+            first: 'Alan',
+            last: 'Turing',
+            born: 1921
+        }
         const result = await db.collection('users').add(document)
         console.log(result)
     });
 
-    it("should read all documents from a collection", async () => {
+    it.skip("should read all documents from a collection", async () => {
         const snapshot = await db.collection("users").get()
         snapshot.forEach((doc) => {
             console.log(doc.id, "->", doc.data())
