@@ -4,9 +4,9 @@
   "description": "firebase POC backend",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "jest": "jest",
     "build": "tsc",
-    "buildAndTest": "tsc && jest"
+    "test": "tsc && jest --verbose"
   },
   "author": "",
   "license": "ISC",

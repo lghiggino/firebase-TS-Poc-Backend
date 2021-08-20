@@ -6,8 +6,7 @@ describe("It should test the average of numbers in an array", () => {
     })
 
     it("average([2, 3, 4, 5, 6, 7, 8]) should return 5", () => {
-        const resp = average([2, 3, 4, 5, 6, 7, 8])
-        console.log(resp)
-        expect(resp).toBe(5)
+        const result = average([2, 3, 4, 5, 6, 7, 8])
+        expect(result).toBe(5)
     })
 })
