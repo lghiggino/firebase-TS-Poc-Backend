@@ -1,6 +1,6 @@
 import average from "../src/average"
 
-describe("It should test the average of numbers in an array", () => {
+describe.skip("It should test the average of numbers in an array", () => {
     it("(average([2, 2]) should return 2", () => {
         expect(average([2, 2])).toBe(2)
     })
