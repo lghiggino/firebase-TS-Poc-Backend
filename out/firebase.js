@@ -18,10 +18,3 @@ var firebaseConfig = {
 };
 exports.fb = app_1.default.initializeApp(firebaseConfig);
 exports.db = exports.fb.firestore();
-//Add data
-// const docRef = db.collection('users').doc('alovelace');
-// docRef.set({
-//   first: 'Ada',
-//   last: 'Lovelace',
-//   born: 1815
-// });
