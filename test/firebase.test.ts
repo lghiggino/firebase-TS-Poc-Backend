@@ -23,11 +23,7 @@ describe("Writing documents", () => {
             last: 'Lovelace',
             born: 1815
         }
-        const document2 = {
-            first: 'Alan',
-            last: 'Turing',
-            born: 1921
-        }
+        
         const result = await db.collection('users').add(document)
     });
 
@@ -52,7 +48,7 @@ describe("Writing documents", () => {
         console.log(result)
     })
 
-    it.only("should create one and update its content", async () => {
+    it("should create one and update its content", async () => {
         //clear DB
         await deleteCollection(db, "users", 5)
         //
@@ -119,5 +115,11 @@ describe("Reading documents", () => {
             id: 'adalovelace',
             first: 'Ada'
         }])
+    })
+})
+
+describe("Observing the database", () => {
+    it.only("should watch the database for changes", async () => {
+        
     })
 })
