@@ -1,4 +1,4 @@
-const admin = require('firebase-admin');
+const admin = require('npm i firebase-admin');
 const serviceAccount = require('../utils/db/serviceAccountKey.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -16,7 +16,7 @@ class Helper {
 
 beforeEach(async () => {
     await Helper.deleteOneByOne("cities")
-
+    
     const citiesRef = db.collection('cities');
 
     await citiesRef.doc('SF').set({
@@ -48,12 +48,17 @@ describe("GET", () => {
         expect(doc.data().name).toBe("Tokyo")
     })
 
-    it("should read ALL documents in the collection", () => {
-        const cityRef = db.collection('cities')
-        console.log(cityRef)
-    })
+    it("should read ALL documents in the collection", async () => {
+        const citiesRef = db.collection('cities');
+        const snapshot = await citiesRef.get();
+        const snapArray = []
+        snapshot.forEach(doc => { snapArray.push(doc.data().name) });
+        expect(snapArray).toHaveLength(5)
+        expect(snapArray).toContain("Washington, D.C.")
+    });
 
     it.skip("get ONE document BY QUERY", () => {
 
     })
 })
+
