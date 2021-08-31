@@ -1,9 +1,4 @@
-const admin = require('npm i firebase-admin');
-const serviceAccount = require('../utils/db/serviceAccountKey.json');
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-const db = admin.firestore();
+const db = require('../utils/db/index')
 
 class Helper {
     static async deleteOneByOne(collectionName) {
@@ -16,16 +11,12 @@ class Helper {
 
 beforeEach(async () => {
     await Helper.deleteOneByOne("cities")
-    
+
     const citiesRef = db.collection('cities');
 
     await citiesRef.doc('SF').set({
         name: 'San Francisco', state: 'CA', country: 'USA',
         capital: false, population: 860000
-    });
-    await citiesRef.doc('LA').set({
-        name: 'Los Angeles', state: 'CA', country: 'USA',
-        capital: false, population: 3900000
     });
     await citiesRef.doc('DC').set({
         name: 'Washington, D.C.', state: null, country: 'USA',
@@ -53,7 +44,7 @@ describe("GET", () => {
         const snapshot = await citiesRef.get();
         const snapArray = []
         snapshot.forEach(doc => { snapArray.push(doc.data().name) });
-        expect(snapArray).toHaveLength(5)
+        expect(snapArray).toHaveLength(4)
         expect(snapArray).toContain("Washington, D.C.")
     });
 
