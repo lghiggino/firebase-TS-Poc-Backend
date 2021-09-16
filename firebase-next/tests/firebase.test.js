@@ -11,6 +11,7 @@ class Helper {
 
 beforeEach(async () => {
     await Helper.deleteOneByOne("cities")
+    await Helper.deleteOneByOne("cities")
 
     const citiesRef = db.collection('cities');
 
@@ -33,7 +34,7 @@ beforeEach(async () => {
 })
 
 describe("GET", () => {
-    it.skip("get ONE document BY REFERENCE", async () => {
+    it("get ONE document BY REFERENCE", async () => {
         const cityRef = db.collection('cities').doc('TOK');
         const doc = await cityRef.get();
         expect(doc.data().name).toBe("Tokyo")
@@ -47,6 +48,24 @@ describe("GET", () => {
         expect(snapArray).toHaveLength(4)
         expect(snapArray).toContain("Washington, D.C.")
     });
+
+    it("should get multiple documents from a collection based on a query", async () => {
+        const citiesRef = db.collection("cities")
+        const snapshot = await citiesRef.where("capital", "==", true).get()
+        const snapArray = []
+        snapshot.forEach(doc => {
+            snapArray.push(doc.data())
+        })
+        console.log(snapArray)
+        expect(snapArray).toHaveLength(3)
+        expect(snapArray).not.toContain(
+            {
+                name: 'San Francisco', state: 'CA', country: 'USA',
+                capital: false, population: 860000
+            }
+        )
+    })
+    //https://firebase.google.com/docs/firestore/query-data/get-data
 
     it.skip("get ONE document BY QUERY", () => {
 
