@@ -15,10 +15,8 @@ beforeEach(async () => {
 
     const citiesRef = db.collection('cities');
 
-    await citiesRef.doc('SF').set({
-        name: 'San Francisco', state: 'CA', country: 'USA',
-        capital: false, population: 860000
-    });
+    21-09
+[]
     await citiesRef.doc('DC').set({
         name: 'Washington, D.C.', state: null, country: 'USA',
         capital: true, population: 680000
@@ -68,7 +66,7 @@ describe.skip("GET", () => {
     })
 })
 
-describe("GET Realtime Updates", () => {
+describe.skip("GET Realtime Updates", () => {
     it("should listen to realtime updates to a document", async () => {
         const doc = db.collection("cities").doc("SF")
         await doc.update({
